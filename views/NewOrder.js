@@ -21,6 +21,8 @@ const NewOrder = () => {
                 >
                     <Text style={globalStyles.buttonText}>Crear Nueva Orden</Text>
                 </Button>
+                <View style={{marginTop: 30}}>
+                </View>
                 <Button
                     style={globalStyles.button}
                     rounded

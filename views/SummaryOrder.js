@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const SummaryOrder = () => {
 
-    const { order, total, showTotal, deleteProduct, orderPlaced } = useContext(OrdersContext);
+    const { order, user, total, showTotal, deleteProduct, orderPlaced } = useContext(OrdersContext);
     const [isReady, setIsReady] = useState(false)
 
     //Hook para redireccionar
@@ -19,7 +19,6 @@ const SummaryOrder = () => {
 
     useEffect(() => {
         fontExpo()
-        calculateTotal()
     }, [])
 
     const fontExpo = async () => {
@@ -31,15 +30,14 @@ const SummaryOrder = () => {
         setIsReady(true);
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         calculateTotal();
-    }, [total])
+    }, [order])
 
     const calculateTotal = () => {
-        let newTotal = 0;
         newTotal = order.reduce( (newTotal, article) => newTotal + article.total, 0)
         showTotal(newTotal)
-    }
+    } */
 
     //Redirecciona a progreso pedido
     const progressOrder = () => {
@@ -51,14 +49,16 @@ const SummaryOrder = () => {
                     text: 'Confirmar',
                     onPress: async () => {
                         //Crear pedido
+                        let newTotal = order.reduce( (newTotal, article) => newTotal + article.total, 0)
                         const orderObject = {
                             delivery_time: 0,
                             complete: false,
-                            total: Number(total),
+                            total: Number(newTotal),
+                            name: user.name,
+                            lastname: user.lastname,
                             order: order,
                             create_date: Date.now()
                         }
-                        console.log(orderObject)
                         //Enviarlo a Firebase
                         try {
                             const newOrder = await firebase.db.collection('orders').add(orderObject);
@@ -138,7 +138,7 @@ const SummaryOrder = () => {
                     )
                 })}
 
-                <Text style={globalStyles.quantity}>Total a Pagar: ${total}</Text>
+                <Text style={globalStyles.quantity}>Total a Pagar: ${order.reduce( (newTotal, article) => newTotal + article.total, 0)}</Text>
                 <Button
                     style={{ marginTop: 30 }}
                     full

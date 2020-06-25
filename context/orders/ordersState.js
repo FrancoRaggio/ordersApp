@@ -15,7 +15,15 @@ const OrdersState = (props) => {
         order: [],
         product: false,
         total: 0,
-        idOrder: ''
+        idOrder: '',
+        user: {
+            name: 'Franco',
+            lastname: 'Raggio',
+            email: 'franco@gmail.com',
+            address: 'Calle 53 N645',
+            phone: '+54 11 49325768',
+            image: 'http://i.imgur.com/AMk1x6n.png',
+        }
     }
 
     //use Reducer con dispatch para ejecutar las funciones
@@ -67,6 +75,7 @@ const OrdersState = (props) => {
                 product: state.product,
                 total: state.total,
                 idOrder: state.idOrder,
+                user: state.user,
                 selectProduct,
                 setOrder,
                 showTotal,

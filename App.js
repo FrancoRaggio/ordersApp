@@ -6,6 +6,7 @@ import ProductDetail from './views/ProductDetail';
 import SummaryOrder from './views/SummaryOrder';
 import ProgressOrder from './views/ProgressOrder';
 import Profile from './views/Profile';
+import Camera from './views/Camera';
 import NewOrder from './views/NewOrder';
 import FormProduct from './views/FormProduct';
 
@@ -74,6 +75,13 @@ const App = () => {
                 component={Profile}
                 options={{
                   title: "Perfil"
+                }}
+              />
+              <Stack.Screen
+                name="Camera"
+                component={Camera}
+                options={{
+                  title: "Camara"
                 }}
               />
               <Stack.Screen

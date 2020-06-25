@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Image } from 'react-native'
-import { Container, Content, Footer, FooterTab, Button, Body, H1, Card, Text, CardItem } from 'native-base'
+import { Container, Content, Footer, FooterTab, Thumbnail, Button, Body, H1, Card, Text, CardItem } from 'native-base'
 import OrdersContext from '../context/orders/ordersContext';
 import globalStyles from '../styles/global'
 import { useNavigation } from '@react-navigation/native'
@@ -20,8 +20,8 @@ const ProductDetail = () => {
                 <Card>
                     <CardItem>
                         <Body>
-                            <Image style={globalStyles.image} source={{uri: image}} />
-
+                            {/* <Image style={globalStyles.image} source={{uri: image}} /> */}
+                            <Thumbnail style={globalStyles.image} large square source={{uri:image}} />
                             <Text style={{marginTop: 20}}>{description}</Text>
                             <Text style={globalStyles.quantity}>Precio: ${price}</Text>
                         </Body>

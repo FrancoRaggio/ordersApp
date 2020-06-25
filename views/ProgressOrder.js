@@ -12,11 +12,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 const ProgressOrder = () => {
 
+    const { idOrder, user } = useContext(OrdersContext);
     const navigation = useNavigation();
-    const { idOrder } = useContext(OrdersContext);
     const [time, setTime] = useState(0)
     const [complete, setComplete] = useState(false)
-    const [client, setClient] = useState({})
+    const [client, setClient] = useState({name: user.name, lastname: user.lastname})
     const [isReady, setIsReady] = useState(false)
 
     useEffect(() => {
@@ -34,6 +34,12 @@ const ProgressOrder = () => {
                         })
         }
         getProduct()
+        setTimeout(() => {
+            setTime(5)
+        }, 5000);
+        setTimeout(() => {
+            setComplete(true)
+        }, 15000);
     }, [])
 
     const fontExpo = async () => {
@@ -63,6 +69,7 @@ const ProgressOrder = () => {
             <View style={[globalStyles.content, {marginTop: 50}]}>
                 {time === 0 && (
                     <>
+                        <H3 style={{textAlign: 'center'}}>{client.name + ' ' + client.lastname} </H3>
                         <H1 style={{textAlign: 'center'}}>Gracias</H1>
                         <Text style={{textAlign: 'center'}}>Hemos recibido tu orden...</Text>
                         <Text style={{textAlign: 'center'}}>Estamos calculando el tiempo de entrega</Text>

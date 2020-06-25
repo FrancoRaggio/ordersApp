@@ -1,76 +1,46 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
+import React, { useContext } from 'react';
+import { View } from 'react-native'
+import { Container, Button, Text, Content, Card, CardItem, H1, Body, Thumbnail } from 'native-base'
+import globalStyles from '../styles/global'
+import { useNavigation } from '@react-navigation/native'
+import OrdersContext from '../context/orders/ordersContext'
 
-export default function Profile() {
+const Profile = () => {
+    
+    //Context de Pedidos
+    const { user } = useContext(OrdersContext);
+    //Hook para redireccionar
+    const navigation = useNavigation();
 
-    const [hasPermission, setHasPermission] = useState(null);
-    const [cameraRef, setCameraRef] = useState(null)
-    const [type, setType] = useState(Camera.Constants.Type.back);
-
-    useEffect(() => {
-        (async () => {
-        const { status } = await Camera.requestPermissionsAsync();
-        setHasPermission(status === 'granted');
-        })();
-    }, []);
-    if (hasPermission === null) {
-        return <View />;
-    }
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-    }
-
-    return (
-    <View style={{ flex: 1 }}>
-        <Camera style={{ flex: 1 }} type={type} ref={ref => {
-            setCameraRef(ref) ;
-        }}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            justifyContent: 'flex-end'
-          }}>
-          <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: 'flex-end'
-            }}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}>
-            <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Cambiar Camara </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{alignSelf: 'center'}} onPress={async() => {
-            if(cameraRef){
-              let photo = await cameraRef.takePictureAsync();
-            }
-          }}>
-            <View style={{ 
-               borderWidth: 2,
-               borderColor: 'white',
-               height: 50,
-               width:50,
-               display: 'flex',
-               justifyContent: 'center',
-               alignItems: 'center'}}
-            >
-              <View style={{
-                 borderWidth: 2,
-                 borderColor: 'white',
-                 height: 40,
-                 width:40,
-                 backgroundColor: 'white'}} >
-              </View>
+    return ( 
+        <Container style={globalStyles.container}>
+            <View style={globalStyles.content}>
+                <Content style={globalStyles.content}>
+                    <H1 style={globalStyles.title}>{user.name+' '+user.lastname}</H1>
+                    <Card>
+                        <CardItem>
+                            <Body>
+                                <Thumbnail style={globalStyles.image} large square source={{uri: user.image}} />
+                                <Text style={{fontSize: 18}}>Direccion: {user.address}</Text>
+                                <Text style={{fontSize: 18}}>Telefono: {user.phone}</Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
+                </Content>
+                <View style={{marginTop: 30}}>
+                </View>
+                <Button
+                    style={[globalStyles.button, {marginBottom: 20}]}
+                    rounded
+                    block
+                    onPress={ () => navigation.navigate('Camera') }
+                >
+                    <Text style={globalStyles.buttonText}>Sacar foto de perfil</Text>
+                </Button>
             </View>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
-  );
+            
+        </Container>
+    );
 }
+ 
+export default Profile;

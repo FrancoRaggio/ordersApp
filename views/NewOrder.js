@@ -17,7 +17,9 @@ const NewOrder = () => {
                     style={globalStyles.button}
                     rounded
                     block
-                    onPress={ () => navigation.navigate('Menu') }
+                    onPress={ () => {
+                        navigation.navigate('Menu') 
+                    }}
                 >
                     <Text style={globalStyles.buttonText}>Crear Nueva Orden</Text>
                 </Button>
@@ -27,7 +29,9 @@ const NewOrder = () => {
                     style={globalStyles.button}
                     rounded
                     block
-                    onPress={ () => navigation.navigate('Profile') }
+                    onPress={ () => {
+                        navigation.navigate('Profile')
+                    }}
                 >
                     <Text style={globalStyles.buttonText}>Perfil</Text>
                 </Button>

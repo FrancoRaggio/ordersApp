@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Alert } from 'react-native'
+import { Alert, Vibration } from 'react-native'
 import { Container, Content, Form, Icon, Input, Grid, Col, Button, Text, Footer, FooterTab } from 'native-base'
 import OrdersContext from '../context/orders/ordersContext';
 import globalStyles from '../styles/global'
@@ -74,6 +74,7 @@ const FormProduct = () => {
                         }
                         await setOrder(order)
                         
+                        Vibration.vibrate(250)
                         navigation.navigate('SummaryOrder')
                     }
                 },

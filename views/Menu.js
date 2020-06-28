@@ -1,5 +1,5 @@
 import React,{ useContext, useEffect, Fragment, useState } from 'react';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Vibration } from 'react-native'
 import { Container, Separator, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base'
 import globalStyles from '../styles/global'
 import FirebaseContext from '../context/firebase/firebaseContext'
@@ -71,6 +71,7 @@ const Menu = () => {
                                 <ListItem 
                                     onPress={ () => {
                                         selectProduct(product);
+                                        Vibration.vibrate(250)
                                         navigation.navigate('ProductDetail')
                                     }}
                                 >

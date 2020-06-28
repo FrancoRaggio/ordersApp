@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Vibration } from 'react-native'
 import { Container, H1, H3, Button, Text } from 'native-base'
 import globalStyles from '../styles/global'
 import OrdersContext from '../context/orders/ordersContext';
@@ -35,9 +35,11 @@ const ProgressOrder = () => {
         }
         getProduct()
         setTimeout(() => {
+            Vibration.vibrate(250)
             setTime(5)
         }, 5000);
         setTimeout(() => {
+            Vibration.vibrate(250)
             setComplete(true)
         }, 15000);
     }, [])

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Image } from 'react-native'
+import { Vibration } from 'react-native'
 import { Container, Content, Footer, FooterTab, Thumbnail, Button, Body, H1, Card, Text, CardItem } from 'native-base'
 import OrdersContext from '../context/orders/ordersContext';
 import globalStyles from '../styles/global'
@@ -33,6 +33,7 @@ const ProductDetail = () => {
                     <Button
                         style={globalStyles.button}
                         onPress={ () => {
+                            Vibration.vibrate(250)
                             navigation.navigate('FormProduct')
                         }}
                     >

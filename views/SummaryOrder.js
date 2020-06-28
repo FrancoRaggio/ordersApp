@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, StyleSheet } from 'react-native'
+import { Alert, StyleSheet, Vibration } from 'react-native'
 import { Container, Content, List, ListItem, Thumbnail, Text, Left, Body, H1, Button, Footer, FooterTab } from 'native-base'
 import OrdersContext from '../context/orders/ordersContext';
 import globalStyles from '../styles/global'
@@ -64,6 +64,7 @@ const SummaryOrder = () => {
                             const newOrder = await firebase.db.collection('orders').add(orderObject);
                             await orderPlaced(newOrder.id)
                             //Redireccionar a Progreso de pedido
+                            Vibration.vibrate(250)
                             navigation.navigate('ProgressOrder')
                         } catch (error) {
                             console.error(error)
